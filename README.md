@@ -17,16 +17,13 @@ The best way to visualize the notebooks is to open the `html` version of the not
 From there, you can "run or edit" with Julia (if installed on your machine) or with the free[^3] Binder cloud service.
 The user is free to change parameters to go beyond what is shown in the paper.
 
-- Figure 1 - Exactly reproducible in the self-contained Pluto notebook [`Figure_1.jl`](https://github.com/dmetivie/Robust-Randomized-Quasi-Monte-Carlo-paper-code/blob/5e702cf6dede8b50c8f6bb1c6faa961b04007044/short_simulation_notebooks/Figure_1.jl) or open the friendly [`html` version of `Figure_1.jl`](https://raw.githack.com/dmetivie/Robust-Randomized-Quasi-Monte-Carlo-paper-code/b8cd89c97883b4ebb1075fd1e605d0ec4a4af575/short_simulation_notebooks/Figure_1.html) in a web browser to see directly the resulting notebook. It runs for approximately 10 minutes with the paper settings of $M = 10^7$. This notebook only showcases robust estimators without any Quasi Monte Carlo.
-  - Figure 1.a
-  - Figure 1.b
-- Figure 5 - Exactly reproducible in the Pluto notebook. The two following ``versions`` are exactly the same, the first one is just rendered as an `html` page.
-  - The friendly notebook [version of `Figure_5.jl`](https://raw.githack.com/dmetivie/Robust-Randomized-Quasi-Monte-Carlo-paper-code/5e702cf6dede8b50c8f6bb1c6faa961b04007044/short_simulation_notebooks/Figure_5.html).
-  - The script version of the notebook [`Figure_5.jl`](https://github.com/dmetivie/Robust-Randomized-Quasi-Monte-Carlo-paper-code/blob/5e702cf6dede8b50c8f6bb1c6faa961b04007044/short_simulation_notebooks/Figure_5.jl).
-It runs for approximately 40 minutes with the paper settings of $M = 10^4$. This notebook shows the whole workflow to do multiple Robust Randomized Quasi Monte Carlo. Thanks to Pluto's capabilities, we only show the interesting and interactive pieces and hide[^2] the background functions.
-- Figure 5 - Exactly reproducible in the Pluto notebook. The two following ``versions`` are exactly the same, the first one is just rendered as an `html` page.
+- Figure 1 (Figure 1.a and Figure 1.b) - Exactly reproducible in the self-contained Pluto notebook. The two following "versions" are exactly the same, the first one is just rendered as an `html` page. 
+    - [`Figure_1.jl`](https://github.com/dmetivie/Robust-Randomized-Quasi-Monte-Carlo-paper-code/blob/5e702cf6dede8b50c8f6bb1c6faa961b04007044/short_simulation_notebooks/Figure_1.jl) 
+    - The friendly [version of `Figure_1.jl`](https://raw.githack.com/dmetivie/Robust-Randomized-Quasi-Monte-Carlo-paper-code/b8cd89c97883b4ebb1075fd1e605d0ec4a4af575/short_simulation_notebooks/Figure_1.html) in a web browser to see directly the resulting notebook. 
+    It runs for approximately 10 minutes with the paper settings of $M = 10^7$. This notebook only showcases robust estimators without any Quasi Monte Carlo.
+- Figure 5 - Exactly reproducible in the Pluto notebook. The two following "versions" are exactly the same, the first one is just rendered as an `html` page.
   - The friendly [version of `Figure_5.jl`](https://raw.githack.com/dmetivie/Robust-Randomized-Quasi-Monte-Carlo-paper-code/5e702cf6dede8b50c8f6bb1c6faa961b04007044/short_simulation_notebooks/Figure_5.html).
-  - The script version of the notebook [`Figure_5.jl`](https://github.com/dmetivie/Robust-Randomized-Quasi-Monte-Carlo-paper-code/blob/5e702cf6dede8b50c8f6bb1c6faa961b04007044/short_simulation_notebooks/Figure_5.jl)  
+  - The script version of the notebook [`Figure_5.jl`](https://github.com/dmetivie/Robust-Randomized-Quasi-Monte-Carlo-paper-code/blob/5e702cf6dede8b50c8f6bb1c6faa961b04007044/short_simulation_notebooks/Figure_5.jl).
 It runs for approximately 40 minutes with the paper settings of $M = 10^4$. This notebook shows the whole workflow to do multiple Robust Randomized Quasi Monte Carlo. Thanks to Pluto's capabilities, we only show the interesting and interactive pieces and hide[^2] the background functions.
 
 [^2]: Hidden cells can be shown again by clicking on the eye symbol next to them. All the code is visible in the `.jl` script.
