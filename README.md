@@ -1,10 +1,10 @@
 # The Robust Randomized Quasi Monte Carlo method, applications to integrating singular functions
 
 This repository contains the code of the paper [The Robust Randomized Quasi Monte Carlo method, applications
-to integrating singular functions](https://hal.science/hal-03631879) by E. Gobet M. Lerasle and D. Métivier.
+to integrating singular functions](https://hal.science/hal-03631879) by Emmanuel Gobet, Matthieu Lerasle and David Métivier.
 
 The paper contains multiple figures. In all, the code $M$ is the number of realizations used to show the estimators' density. Since we are interested in the tails of this distribution, we typically need $M$ very large, which makes the simulation quite heavy. Some simulations are lightweight and can run in less than an hour, they are in a Julia Pluto notebook.
-Other heavy simulations are given a script meant to run in parallel on a Slurm or SGE cluster.
+Other heavy simulations are given a script meant to be run in parallel on a Slurm or SGE cluster.
 
 For all the Randomized Quasi Monte Carlo simulations, we use $M$ Nested Uniform Scramble of the Sobol' sequence[^1].
 
@@ -14,8 +14,8 @@ For all the Randomized Quasi Monte Carlo simulations, we use $M$ Nested Uniform 
 
 These simulations take less than an hour and can then be put into a Pluto Notebook.
 The best way to visualize the notebooks is to open the `html` version of the notebook in a browser.
-From there, you can "run or edit" with Julia (if installed on your machine) or with the free[^3] Binder cloud service.
-The user is free to change parameters to go beyond what is shown in the paper.
+From there, you can "Run or Edit" with Julia (if installed on your machine) or with the free[^3] Binder cloud service.
+The user is free to change parameters to explore beyond what is shown in the paper.
 
 - Figure 1 (Figure 1.a and Figure 1.b) - Exactly reproducible in the self-contained Pluto notebook. 
     It runs for approximately 10 minutes with the paper settings of $M = 10^7$. This notebook only showcases robust estimators without any Quasi Monte Carlo.
@@ -33,8 +33,8 @@ The user is free to change parameters to go beyond what is shown in the paper.
 
 ## Heavy simulations
 
-These simulations use high-dimensional RQMC simulations with $M = 10^4$. In order to run, one must typically use HPC/cluster computing. Unfortunately, Julia distributed computing is not very easily and efficiently reproducible, i.e., getting the same result regardless of the number of cores. It is not as simple as fixing a `seed` in serial computation.
-Hence, here we provide the script that can be used to produce similar figures. Since $M\times n$ is quite high, the result should be very similar to the paper figure.
+These simulations use high-dimensional Randomized Quasi Monte Carlo simulations with $M = 10^4$. In order to run, one must typically use HPC/cluster computing. Unfortunately, the authors were not able to find a simple and efficient way to do distributed computations on a cluster, i.e., getting the same result regardless of the number of cores used without affecting the performance. It is not as simple as fixing a `seed` in serial computation.
+Hence, here we provide the script that can be used to produce similar figures. Since $M\times n$ is quite high, the result should be very similar to the paper's figures.
 
 - Figure 2
   - Figure 2.a
@@ -52,12 +52,14 @@ Hence, here we provide the script that can be used to produce similar figures. S
 The [Julia programming language](https://julialang.org/) is used in this project.
 One advantage of Julia is that it is both readable and fast (compiled).
 There is no `C/C++/Fortan` wrapper.
-All the code is Julia (and the packages used too). Hence, it is very easy to take a look at the randomization methods used in the paper, see [here](https://github.com/SciML/QuasiMonteCarlo.jl/blob/4cb665d27bed64871039b873e68060ef8cc374de/src/RandomizedQuasiMonteCarlo/scrambling_base_b.jl#L66) for example for Nested Uniform Scrambling.
+All the code is Julia (and the packages used too). Hence, it is very easy to take a look at the randomization methods used in the paper, see [here](https://github.com/SciML/QuasiMonteCarlo.jl/blob/4cb665d27bed64871039b873e68060ef8cc374de/src/RandomizedQuasiMonteCarlo/scrambling_base_b.jl#L66) for example for Nested Uniform Scrambling[^4].
+
+[^4]: Obviously reading this piece of code without context is not very helpful.
 
 Main packages used
 
-- [QuasiMonteCarlo.jl](https://github.com/SciML/QuasiMonteCarlo.jl) developed by multiple authors. The documentation can be found [here](https://docs.sciml.ai/QuasiMonteCarlo/stable/). @dmetivie contributed to the Quasi Monte randomization method and docs of the package.
-- [RobustMeans](https://github.com/dmetivie/RobustMeans.jl) developed by @dmetivie, one of the authors of the paper.
+- [QuasiMonteCarlo.jl](https://github.com/SciML/QuasiMonteCarlo.jl) developed by multiple authors. The documentation can be found [here](https://docs.sciml.ai/QuasiMonteCarlo/stable/). [@dmetivie](https://github.com/dmetivie) contributed to the Quasi Monte randomization method and docs of the package.
+- [RobustMeans](https://github.com/dmetivie/RobustMeans.jl) developed by [@dmetivie](https://github.com/dmetivie).
 
 ### Pluto notebooks
 
@@ -65,7 +67,7 @@ Most readers are probably familiar with Jupyter notebooks, Pluto's notebooks hav
 Here are some:
 
 - Works only for Julia.
-- Reactive, i.e., if you change one parameter somewhere in the notebook, all other parameters depending on function, plots, text, etc. will be automatically reevaluated to the new value. This allows one to quickly explore the effects of changing parameters, methods, etc.
+- Reactive, i.e., if you change one parameter somewhere in the notebook, all other parameters depending on function, plots, text, etc. will be automatically reevaluated accordingly. This allows one to quickly explore the effects of changing parameters, methods, etc.
 - They are reproducible by nature, i.e., all the exact information on versioning used to generate the result is contained in the notebook.
 - They are Julia files, i.e., one can open them as a simple and readable Julia script or as the notebook version.
 
