@@ -12,6 +12,7 @@ used_mem() = (println("$(round((Sys.total_memory()-Sys.free_memory())/2^30 -9))G
 using Distributed
 num_cores = 1 # Explicit declaration
 ## num_cores = parse(Int, ENV["SLURM_NPROCS"]) # on SLURM
+## num_cores = parse(Int, ENV["NSLOTS"]) # on SGE
 
 addprocs(num_cores)
 
