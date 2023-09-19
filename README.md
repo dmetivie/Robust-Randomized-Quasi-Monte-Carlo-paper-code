@@ -31,11 +31,11 @@ These simulations use high-dimensional RQMC simulations with $M = 10^4$. In orde
 Hence, here we provide the script that can be used to produce similar figures. Since $M\times n$ is quite high, the result should be very similar to the paper figure.
 
 - Figure 2
-  * Figure 2.a
-  * Figure 2.b
+    * Figure 2.a
+    * Figure 2.b
 - Figure 3
-  * Figure 3.a
-  * Figure 3.b
+    * Figure 3.a
+    * Figure 3.b
 - Figure 4
 - Figure 6
 
