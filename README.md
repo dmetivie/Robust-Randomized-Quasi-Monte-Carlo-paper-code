@@ -3,7 +3,7 @@
 This repository contains the code of the paper [The Robust Randomized Quasi Monte Carlo method, applications
 to integrating singular functions](https://hal.science/hal-03631879) by E. Gobet M. Lerasle and D. Métivier.
 
-The paper contains multiple figures. In all, the code $M$ is the number of realizations used to show the estimators' density. Since we are interested in the tails of this distribution, we typically need $M$ very large, which makes the simulation quite heavy. Some simulations lightweight and can run in less than an hour, they are in a Julia Pluto notebook.
+The paper contains multiple figures. In all, the code $M$ is the number of realizations used to show the estimators' density. Since we are interested in the tails of this distribution, we typically need $M$ very large, which makes the simulation quite heavy. Some simulations are lightweight and can run in less than an hour, they are in a Julia Pluto notebook.
 Other heavy simulations are given a script meant to run in parallel on a Slurm or SGE cluster.
 
 For all the Randomized Quasi Monte Carlo simulations, we use $M$ Nested Uniform Scramble of the Sobol' sequence[^1].
@@ -17,14 +17,16 @@ The best way to visualize the notebooks is to open the `html` version of the not
 From there, you can "run or edit" with Julia (if installed on your machine) or with the free[^3] Binder cloud service.
 The user is free to change parameters to go beyond what is shown in the paper.
 
-- Figure 1 (Figure 1.a and Figure 1.b) - Exactly reproducible in the self-contained Pluto notebook. The two following "versions" are exactly the same, the first one is just rendered as an `html` page. 
-    - [`Figure_1.jl`](https://github.com/dmetivie/Robust-Randomized-Quasi-Monte-Carlo-paper-code/blob/5e702cf6dede8b50c8f6bb1c6faa961b04007044/short_simulation_notebooks/Figure_1.jl) 
-    - The friendly [version of `Figure_1.jl`](https://raw.githack.com/dmetivie/Robust-Randomized-Quasi-Monte-Carlo-paper-code/b8cd89c97883b4ebb1075fd1e605d0ec4a4af575/short_simulation_notebooks/Figure_1.html) in a web browser to see directly the resulting notebook. 
-    It runs for approximately 10 minutes with the paper settings of $M = 10^7$. This notebook only showcases robust estimators without any Quasi Monte Carlo.
-- Figure 5 - Exactly reproducible in the Pluto notebook. The two following "versions" are exactly the same, the first one is just rendered as an `html` page.
-  - The friendly [version of `Figure_5.jl`](https://raw.githack.com/dmetivie/Robust-Randomized-Quasi-Monte-Carlo-paper-code/5e702cf6dede8b50c8f6bb1c6faa961b04007044/short_simulation_notebooks/Figure_5.html).
-  - The script version of the notebook [`Figure_5.jl`](https://github.com/dmetivie/Robust-Randomized-Quasi-Monte-Carlo-paper-code/blob/5e702cf6dede8b50c8f6bb1c6faa961b04007044/short_simulation_notebooks/Figure_5.jl).
-It runs for approximately 40 minutes with the paper settings of $M = 10^4$. This notebook shows the whole workflow to do multiple Robust Randomized Quasi Monte Carlo. Thanks to Pluto's capabilities, we only show the interesting and interactive pieces and hide[^2] the background functions.
+- Figure 1 (Figure 1.a and Figure 1.b) - Exactly reproducible in the self-contained Pluto notebook.
+    It runs for approximately 10 minutes with the paper settings of $M = 10^7$. This notebook only showcases robust estimators without any Quasi Monte Carlo.
+    The two following "versions" are exactly the same, the first one is just rendered as an `html` page.
+    - The friendly [version of `Figure_1.jl`](https://raw.githack.com/dmetivie/Robust-Randomized-Quasi-Monte-Carlo-paper-code/b8cd89c97883b4ebb1075fd1e605d0ec4a4af575/short_simulation_notebooks/Figure_1.html) in a web browser to see directly the resulting notebook.
+    - [`Figure_1.jl`](https://github.com/dmetivie/Robust-Randomized-Quasi-Monte-Carlo-paper-code/blob/5e702cf6dede8b50c8f6bb1c6faa961b04007044/short_simulation_notebooks/Figure_1.jl)
+- Figure 5 - Exactly reproducible in the Pluto notebook.
+    It runs for approximately 40 minutes with the paper settings of $M = 10^4$. This notebook shows the whole workflow to do multiple Robust Randomized Quasi Monte Carlo. Thanks to Pluto's capabilities, we only show the interesting and interactive pieces and hide[^2] the background functions.
+    The two following "versions" are exactly the same, the first one is just rendered as an `html` page.
+  - The friendly [version of `Figure_5.jl`](https://raw.githack.com/dmetivie/Robust-Randomized-Quasi-Monte-Carlo-paper-code/5e702cf6dede8b50c8f6bb1c6faa961b04007044/short_simulation_notebooks/Figure_5.html).
+  - The script version of the notebook [`Figure_5.jl`](https://github.com/dmetivie/Robust-Randomized-Quasi-Monte-Carlo-paper-code/blob/5e702cf6dede8b50c8f6bb1c6faa961b04007044/short_simulation_notebooks/Figure_5.jl).
 
 [^2]: Hidden cells can be shown again by clicking on the eye symbol next to them. All the code is visible in the `.jl` script.
 [^3]: This cloud service is (currently) free without registration. Hence, in one click, it loads the notebook and runs it. Setup might take some time.
@@ -35,11 +37,11 @@ These simulations use high-dimensional RQMC simulations with $M = 10^4$. In orde
 Hence, here we provide the script that can be used to produce similar figures. Since $M\times n$ is quite high, the result should be very similar to the paper figure.
 
 - Figure 2
-  - Figure 2.a
-  - Figure 2.b
+  - Figure 2.a
+  - Figure 2.b
 - Figure 3
-  - Figure 3.a
-  - Figure 3.b
+  - Figure 3.a
+  - Figure 3.b
 - Figure 4
 - Figure 6
 
