@@ -2,6 +2,13 @@
 # v0.19.27
 
 #> custom_attrs = ["hide-enabled"]
+#> 
+#> [frontmatter]
+#> Author = "David Métivier"
+#> title = "Robust Quasi Monte Carlo Figure 5"
+#> date = "2023-09-15"
+#> tags = ["Quasi-MonteCarlo", "Robust-Statistic", "paper-with-code", "julia", "pluto-notebook"]
+#> description = "This notebook shows the whole workflow to simulate and plot Figure 5 of the paper \"The Robust Randomized Quasi Monte Carlo method, applications to integrating singular functions\""
 
 using Markdown
 using InteractiveUtils
@@ -64,6 +71,22 @@ using StatsPlots, LaTeXStrings
 # ╔═╡ dc5b3731-1ebf-4cbb-a5f0-ceccdecc8ae9
 using QuasiMonteCarlo, QMCGenerators
 
+# ╔═╡ e79d3b3c-981f-4c3f-9fea-23fe544fb9f2
+md"""
+In this notebook, we focus on the scientific code and hide by default the code used to create the interactive features. This hidden code can be reveal in the notebook or seen directly in the script version.
+"""
+
+# ╔═╡ 0d7dc098-57b8-4960-bef1-f0d7fbf9bab3
+md"""
+# Packages
+"""
+
+# ╔═╡ 36e3cb04-bf9a-495f-ba2b-671d95a0ea94
+# ╠═╡ custom_attrs = ["toc-hidden"]
+md"""
+## Pluto packages
+"""
+
 # ╔═╡ 4ce6403c-ae28-405e-af5f-3058f1bb4421
 # html"""
 # <style>
@@ -79,16 +102,14 @@ using QuasiMonteCarlo, QMCGenerators
 # </style>
 # """
 
-# ╔═╡ 0d7dc098-57b8-4960-bef1-f0d7fbf9bab3
-# ╠═╡ custom_attrs = ["toc-hidden"]
-md"""
-# Packages
-"""
-
 # ╔═╡ 7c29c5ec-a05c-450d-b108-d87abff57635
+# ╠═╡ custom_attrs = ["toc-hidden"]
 md"""
 ## Pluto nice looking stuff
 """
+
+# ╔═╡ 1a3635dd-d283-4dfd-aa46-138a36166970
+ExtendedTableOfContents(title="Robust Quasi Monte Carlo")
 
 # ╔═╡ b0e1fbc2-eb39-425f-80f3-13f1ce64259d
 struct Bypass
@@ -111,13 +132,11 @@ function Base.show(io::IO, ::MIME"text/javascript", o::Bypass)
     write(io, "`")
 end
 
-# ╔═╡ 1a3635dd-d283-4dfd-aa46-138a36166970
-ExtendedTableOfContents(title="Robust Quasi Monte Carlo")
-
 # ╔═╡ 2883121d-f293-4de3-a61f-a542caf59fe5
 # using ProgressMeter
 
 # ╔═╡ 3cdb1c90-569e-4d57-8b48-a0701966fb80
+# ╠═╡ custom_attrs = ["toc-hidden"]
 md"""
 ## Statistics packages
 """
@@ -126,22 +145,10 @@ md"""
 Random.seed!(1234)
 
 # ╔═╡ 5b78eba6-556a-4339-ad89-f00f9166939a
+# ╠═╡ custom_attrs = ["toc-hidden"]
 md"""
 ## Helpers
 """
-
-# ╔═╡ f338b66c-91d4-4858-b072-b1f1866fb781
-"""
-    computing_means(X::AbstractMatrix, estimators, δ)
-Given X and an mean estimator compute the estimator for each column.
-"""
-function computing_means(X::AbstractMatrix, estimators, δ)
-    results = OrderedDict{Symbol,Vector}()
-    for (name, μ̂) in estimators
-        results[name] = [mean(c, δ, μ̂) for c in eachcol(X)]
-    end
-    return results
-end
 
 # ╔═╡ 4c8bd31f-caac-494b-afaa-b947a877467c
 function RobustMeans.mean(A::AbstractArray, δ::Real, Estimator::Catoni{<:Nothing}, kwargs...)
@@ -186,6 +193,19 @@ function RobustMeans.mean(A::AbstractArray, δ::Real, Estimator::Huber{<:Nothing
     α = RobustMeans.α_Huber(δ, n, std(A))
     z = RobustMeans.Z_Estimator(α, RobustMeans.ψ_Huber)
     return mean(A, z; kwargs...)
+end
+
+# ╔═╡ f338b66c-91d4-4858-b072-b1f1866fb781
+"""
+    computing_means(X::AbstractMatrix, estimators, δ)
+Given X and an mean estimator compute the estimator for each column.
+"""
+function computing_means(X::AbstractMatrix, estimators, δ)
+    results = OrderedDict{Symbol,Vector}()
+    for (name, μ̂) in estimators
+        results[name] = [mean(c, δ, μ̂) for c in eachcol(X)]
+    end
+    return results
 end
 
 # ╔═╡ 8391ed4c-770b-44a9-b740-1ac56b477744
@@ -242,6 +262,7 @@ function QuasiMonteCarlo.sample(n, d, ::DigitalSeqB2G, T=Float64)
 end
 
 # ╔═╡ da42c3ed-f705-465a-ac43-d856d7789ad5
+# ╠═╡ custom_attrs = ["toc-hidden"]
 md"""
 ## Plotting
 """
@@ -468,6 +489,7 @@ md"""
 """
 
 # ╔═╡ 4e58d175-5c38-4ca8-b10d-f16528a6ee7a
+# ╠═╡ custom_attrs = ["toc-hidden"]
 md"""
 ## Table bonds
 """
@@ -848,7 +870,7 @@ begin
             val = results[s][estimate] / μ_exact
             ΔM = abs.(val .- 1)
             println("$s $estimate 𝔼(μ̂) - μ = ", mean(val .- 1), " σ(μ̂) = ", std(val))
-            println("MSE(μ̂) = ", sqrt(var(val) + mean(val .- 1)^2))
+            println("RMSE(μ̂) = ", sqrt(var(val) + mean(val .- 1)^2))
             append!(y_coord, ΔM)
             append!(x_coord, fill(kk, length(ΔM)))
             append!(z_coord, fill(seq_num, length(ΔM)))
@@ -878,6 +900,11 @@ begin
     yticks!(10.0 .^ (-9:-0))
     ylabel!(L"|\hat{\mu}_{N,n}-\mu|/\mu", tickfonthalign=:center)
 end
+
+# ╔═╡ bbe9940c-1626-496b-80fa-00dfab30a031
+md"""
+We display the Root Mean Square error as well as the bias and variance. This shows that not only robust estimator are better than EM for the tails but are better at RMSE (not at bias only though).
+"""
 
 # ╔═╡ 20cd6866-1508-4f00-956e-c64337207eca
 md"""
@@ -915,7 +942,7 @@ begin
     plot!(Normal(), label=L"\mathcal{N}(0,1)", c=:black, alpha=0.6)
     for (i, (name, s)) in enumerate(results[qmc_seq])
         W = √(n * N) * (s .- μ_exact) / σ_exact
-        stephist!(W, alpha=0.6, norm=:pdf, label=string(name), c=i)
+        density!(W, alpha=0.6, norm=:pdf, label=string(name), c=i)
         # vline!([quantile(W, 1-δ)], s = :dot, c = i)
     end
 
@@ -931,17 +958,19 @@ begin
 end
 
 # ╔═╡ Cell order:
+# ╟─0d7dc098-57b8-4960-bef1-f0d7fbf9bab3
+# ╟─e79d3b3c-981f-4c3f-9fea-23fe544fb9f2
+# ╟─36e3cb04-bf9a-495f-ba2b-671d95a0ea94
 # ╠═1cb37c25-2470-4094-8e09-d2ba44e8d68d
 # ╠═4ce6403c-ae28-405e-af5f-3058f1bb4421
-# ╟─0d7dc098-57b8-4960-bef1-f0d7fbf9bab3
 # ╟─7c29c5ec-a05c-450d-b108-d87abff57635
+# ╠═1a3635dd-d283-4dfd-aa46-138a36166970
 # ╠═45b56d47-11fb-43b8-9488-097244ef0919
 # ╟─b0e1fbc2-eb39-425f-80f3-13f1ce64259d
 # ╟─5441691c-077c-48a9-969c-024ed51da2a7
 # ╟─1391a0eb-8625-4a03-94ce-e6de6eef4c32
 # ╠═2483fc8e-7fc9-4a45-89be-c2bb73fb10fe
 # ╠═f728941b-4280-4195-ab78-58bc8d39182a
-# ╠═1a3635dd-d283-4dfd-aa46-138a36166970
 # ╠═2883121d-f293-4de3-a61f-a542caf59fe5
 # ╟─3cdb1c90-569e-4d57-8b48-a0701966fb80
 # ╠═cfd51eb7-f484-4589-9af6-eccad8465b04
@@ -976,7 +1005,7 @@ end
 # ╟─bb97a3bf-a917-4d33-9e8d-ed12bfeb368b
 # ╟─4e58d175-5c38-4ca8-b10d-f16528a6ee7a
 # ╠═7b715692-6990-4751-a29f-ac0fdd82de38
-# ╠═e4769581-bd49-43f2-955d-007ef8c36d07
+# ╟─e4769581-bd49-43f2-955d-007ef8c36d07
 # ╟─296890ac-9282-498f-923a-6161935bb353
 # ╟─caf5d5fd-a668-45c3-8546-283439e7a329
 # ╟─d6365e9f-b1fe-4194-a7f0-608ba9392296
@@ -988,7 +1017,7 @@ end
 # ╟─8c700188-3c4e-4107-aeda-8c5a2c73d898
 # ╟─95f14109-bce7-469d-8f23-e64f0105787f
 # ╟─de21e3e4-8a36-4f51-8303-b11987293b98
-# ╠═268ed34a-f6f1-4624-bd63-d3acfb668dbc
+# ╟─268ed34a-f6f1-4624-bd63-d3acfb668dbc
 # ╟─9143887c-23df-4d04-a43b-cdd1b92f585d
 # ╟─e8908310-4fdb-420e-ba44-5278de904b53
 # ╟─ee0207ac-f3bd-4be8-888a-9d2e4bc116c9
@@ -1057,8 +1086,9 @@ end
 # ╟─09d8c0d2-ea31-4720-b74f-537c0b8c2424
 # ╟─59d66617-0b42-474b-881d-9244f62d3096
 # ╟─c898f2d0-b57b-4827-9a0f-43fd0dc0f7c9
+# ╟─bbe9940c-1626-496b-80fa-00dfab30a031
 # ╟─20cd6866-1508-4f00-956e-c64337207eca
-# ╠═d7831b42-a57b-4f34-ae0a-61f00e9f9c1c
+# ╟─d7831b42-a57b-4f34-ae0a-61f00e9f9c1c
 # ╟─6a2bb211-e55e-4973-bff2-310085340e70
 # ╟─afd12f94-74fd-4f6f-a7b9-3aaf6a3e5ffe
 # ╟─ca0483d3-fb9f-4035-a5dd-a6ab1da93605

@@ -2,10 +2,11 @@
 # v0.19.27
 
 #> [frontmatter]
-#> title = "David Métivier"
-#> date = "2023-05-04"
-#> tags = ["Quasi Monte Carlo", "Robust"]
-#> description = "Code for the paper https://hal.science/hal-03631879"
+#> Author = "David Métivier"
+#> title = "Robust Quasi Monte Carlo Figure 1"
+#> date = "2023-09-15"
+#> tags = ["julia", "pluto-notebook", "paper-with-code", "Robust-Statistics"]
+#> description = "This notebook shows the whole workflow to simulate and plot Figure 1 of the paper \"The Robust Randomized Quasi Monte Carlo method, applications to integrating singular functions\""
 
 using Markdown
 using InteractiveUtils
